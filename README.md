@@ -5,7 +5,7 @@ Add tabs with a custom nav and slideshow functionality.
 
 ### Requirements
 
-This plugin makes certain assumptions about the HTML that it is invoked on; the HTML must look something like:
+By default this plugin assumes the following markup is in use. However, this can be changed easily by providing a different element selector with the 'tabElem' option.
 
     <div id="tabs">
         <div class="tabs">
@@ -44,7 +44,7 @@ The following options are available - the values shown below are the defaults.
 - grouping : 'none' - Use to group what would otherwise be individual tabs into a single tab
 
 
-### Example
+### Example Usage
 
     $('#tabs').tabs({
         tabElem : '.tab',
