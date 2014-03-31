@@ -1,7 +1,9 @@
 
 (function ( $ ) {
+	'use strict';
 
 	$.fn.tabs = function( options ) {
+
 
 		// Default options
 		$.fn.tabs.defaults = {
@@ -38,21 +40,32 @@
 		(function init() {
 
 			// If tabs need to be grouped, do so
-			if ( options.grouping !== 'none' ) prepareGrouping();
+			if ( options.grouping !== 'none' ) {
+				prepareGrouping();
+			}
 
 			// Check whether a nav is needed 2 or more tabs only
-			if ( tabs.length <= 1 ) hasNav = false;
+			if ( tabs.length <= 1 ) {
+				hasNav = false;
+			}
 
 			// Add general styling to containing elements
-			if ( options.setHeight ) tabs.css( 'min-height', currentHeight );
+			if ( options.setHeight ) {
+				tabs.css( 'min-height', height );
+			}
+
 			container.find( '.tabs' ).css( 'position', 'relative' );
 			tabs.css({ 'width' : options.tabWidth });
 			
 			// Create the nav if required
-			if ( hasNav ) createNav();
+			if ( hasNav ) {
+				createNav();
+			}
 
 			// Initiate automatic tab cycling if enabled
-			if ( options.auto ) autoOn();
+			if ( options.auto ) {
+				autoOn();
+			}
 
 		})();
 
@@ -71,7 +84,9 @@
 					activeClass = '';
 				
 				// hide source element content
-				if ( options.navSourceHide ) $( this ).find( options.navSource ).hide();
+				if ( options.navSourceHide ) {
+					$( this ).find( options.navSource ).hide();
+				}
 
 				// add classes to the nav for first and last
 				if ( tabIndex === 1 ) {
@@ -91,10 +106,14 @@
 
 				nav = nav + '<li class="target-' + tabIndex + ' ' + navItemClass + ' ' + activeClass + '"><a href="#">' + navItemValue + '<span>&nbsp;</span></a></li>';
 
-				if ( tabIndex ===  options.activeTab ) $( this ).addClass( 'active-tab' );
+				if ( tabIndex ===  options.activeTab ) {
+					$( this ).addClass( 'active-tab' );
+				}
 
 				// hide all but the initially active tab
-				if ( tabIndex !==  options.activeTab ) $( this ).hide();
+				if ( tabIndex !==  options.activeTab ) {
+					$( this ).hide();
+				}
 
 				tabIndex++;
 			});
@@ -137,13 +156,13 @@
 		function contentControl ( tgt ) {
 			var nav = $( '#' + options.navId );
 
-			currentheight = heightArray[ tgt - 1 ];
+			currentHeight = heightArray[ tgt - 1 ];
 
 			currentTab = tgt;
 
 			// animate height tab height if options is set
 			if ( options.animateHeight ) {
-				container.animate({ 'height': currentheight });
+				container.animate({ 'height': currentHeight });
 			}
 
 			container.find('.active-tab').removeClass('active-tab').hide();
@@ -172,7 +191,7 @@
 								tgt++;
 							} else {
 								tgt = 1;
-								cycleCount++;						
+								cycleCount++;
 							}
 							
 						} else {
