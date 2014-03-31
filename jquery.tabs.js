@@ -31,7 +31,9 @@
 			tabIndex = 1,
 			currentTab = options.activeTab,
 			currentHeight = heightArray[ currentTab - 1 ],
-			hasNav = true;
+			hasNav = true,
+			navId = options.navId + '-' + container.attr( 'id' ),
+			nav;
 
 		(function init() {
 
@@ -56,7 +58,7 @@
 
 		function createNav ( ) {
 
-			var nav = '<div id="' + options.navId + '" class="' + options.navClass + ' tabs-' + tabs.length + '"><ul class="clearfix">';
+			nav = '<div id="' + navId + '" class="' + options.navClass + ' tabs-' + tabs.length + '"><ul class="clearfix">';
 
 			tabs.each(function(){
 
@@ -116,16 +118,14 @@
 		}
 
 		function addNavEvents () {
+			var nav = $( '#'  + navId );
 
-			$( '#' + options.navId ).delegate( 'a', 'click', function( e ) {
-				e.preventDefault();
-
+			nav.delegate( 'a', 'click', function( e ) {
 				var tgt = parseInt( this.parentNode.className.match( /target-\d/ ).toString().match( /\d/ ) );
 
+				e.preventDefault();
 				options.auto = false;
-
-				container.find( '.active' ).removeClass( 'active' );
-
+				nav.find( '.active' ).removeClass( 'active' );
 				$( this ).parent().addClass( 'active' );
 
 				if ( currentTab !== tgt ) {

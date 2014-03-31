@@ -14,7 +14,7 @@
 
 <div class="container">
 
-        <div id="tabs">
+    <div id="tabs-1">
         <div class="tabs">
 
             <div class="tab">
@@ -45,17 +45,61 @@
         </div>
     </div>
 
+    <div id="tabs-2">
+        <div class="tabs">
+
+            <div class="item">
+                <h1>Item 1</h1>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus, totam obcaecati quasi quisquam quos quaerat nam ullam impedit sunt ipsam voluptates unde deserunt animi magni eum tempore accusantium fugiat fugit.</p>
+            </div>
+
+            <div class="item">
+                <h1>Item 2</h1>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus, totam obcaecati quasi quisquam quos quaerat nam ullam impedit sunt ipsam voluptates unde deserunt animi magni eum tempore accusantium fugiat fugit.</p>
+            </div>
+
+            <div class="item">
+                <h1>Item 3</h1>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus, totam obcaecati quasi quisquam quos quaerat nam ullam impedit sunt ipsam voluptates unde deserunt animi magni eum tempore accusantium fugiat fugit.</p>
+            </div>
+
+            <div class="item">
+                <h1>Item 4</h1>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus, totam obcaecati quasi quisquam quos quaerat nam ullam impedit sunt ipsam voluptates unde deserunt animi magni eum tempore accusantium fugiat fugit.</p>
+            </div>
+
+            <div class="item">
+                <h1>Item 5</h1>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus, totam obcaecati quasi quisquam quos quaerat nam ullam impedit sunt ipsam voluptates unde deserunt animi magni eum tempore accusantium fugiat fugit.</p>
+            </div>
+
+            <div class="item">
+                <h1>Item 6</h1>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus, totam obcaecati quasi quisquam quos quaerat nam ullam impedit sunt ipsam voluptates unde deserunt animi magni eum tempore accusantium fugiat fugit.</p>
+            </div>
+
+        </div>
+    </div>
+
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.js"></script>
 <script src="jquery.tabs.js"></script>
 <script>
-    $('#tabs').tabs({
+
+    $('#tabs-1').tabs({
         tabElem : '.tab',
         activeTab : 1,
         navSource : 'h1',
-        navSourceHide : true,
+        navSourceHide : false,
     });
+
+    $('#tabs-2').tabs({
+        tabElem : '.item',
+        activeTab : 1,
+        grouping: 2
+    });
+
 </script>
 
 </body>
