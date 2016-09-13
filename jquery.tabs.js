@@ -224,10 +224,13 @@
 	};
 
 	Tabs.prototype.prepareGrouping = function() {
+		console.log(this.tabs)
 
 		for (var i = 0; i < this.tabs.length; i += this.options.grouping) {
 			this.tabs.slice(i, i + this.options.grouping ).wrapAll('<div class="tab"></div>');
 		}
+
+		this.tabs = this.container.find('.tab');
 	}
 
 	Tabs.prototype.maxHeight = function(tabs) {
