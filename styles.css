@@ -1,12 +1,11 @@
 
 .container { padding: 20px; }
-
 .tab-nav { 
 	display: table;
 	position: relative;
 	z-index: 1; 
 	width: 100%;
-	margin-bottom: -1px;
+	margin: 20px 0 -1px;
 }
 .tab-nav ul { display: table-row; }
 .tab-nav li {
@@ -28,4 +27,4 @@
 	text-align: center;
 	text-decoration: none;
 }
-.tab { padding: 20px; border: 1px solid #d6d4d0; }
+.tab { padding: 20px; border: 1px solid #d6d4d0; border-radius: 5px; }
