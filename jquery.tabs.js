@@ -19,7 +19,6 @@
 		cycleSpeed: 2000,
 		animateHeight: false,
 		setHeight: false,
-		navId: 'tab-nav',
 		navClass: 'tab-nav',
 		navPosition: 'before',
 		grouping: 'none'
@@ -30,10 +29,11 @@
 		this.options = options;
 
 		this.tabs = this.container.find(this.options.tabElem);
-		this.heightArray = this.maxHeight(tabs);
+		this.heightArray = this.maxHeight(this.tabs);
 		this.height = Math.max.apply(Math, this.heightArray);
 		this.currentTab = this.options.activeTab;
 		this.currentHeight = this.heightArray[this.currentTab - 1];
+		this.navId = this.container.attr('id') + '-nav';
 		this.hasNav = true;
 	};
 
@@ -74,7 +74,7 @@
 
 	Tabs.prototype.createNav = function() {
 		var that = this;
-		var nav = '<div id="' + this.options.navId + '" class="' + this.options.navClass + ' tabs-' + this.tabs.length + '"><ul class="clearfix">';
+		var nav = '<div id="' + this.navId + '" class="' + this.options.navClass + ' tabs-' + this.tabs.length + '"><ul class="clearfix">';
 
 		this.tabs.each(function(index, tab) {
 			// Start index from 1 not 0. Used to number tabs
@@ -142,7 +142,7 @@
 	Tabs.prototype.addNavEvents = function() {
 		var that = this;
 
-		$('#' + this.options.navId).delegate('a', 'click', function(event) {
+		$('#' + this.navId).delegate('a', 'click', function(event) {
 			event.preventDefault();
 
 			var tgt = parseInt(this.parentNode.className.match(/target-\d/).toString().match(/\d/));
@@ -160,7 +160,7 @@
 	};
 
 	Tabs.prototype.contentControl = function (tgt) {
-		var nav = $('#' + this.options.navId);
+		var nav = $('#' + this.navId);
 
 		this.currentheight = this.heightArray[tgt - 1];
 
