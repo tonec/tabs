@@ -1,10 +1,12 @@
-!function(global, factory) {
-	if ( typeof module === "object" && typeof module.exports === "object" ) {
+(function(global, factory) {
+	'use strict';
+
+	if (typeof module === 'object' && typeof module.exports === 'object') {
 		module.export = (['jquery'], factory);
 	} else {
 		factory(global.jQuery);
 	}
-}(this, function($) {
+})(this, function($) {
 	'use strict';
 
 	// Default options
@@ -73,51 +75,56 @@
 	};
 
 	Tabs.prototype.createNav = function() {
-		var that = this;
-		var nav = '<div id="' + this.navId + '" class="' + this.options.navClass + ' tabs-' + this.tabs.length + '"><ul class="clearfix">';
+		var _this = this;
+		var nav = '';
+
+		nav += '<div id="' + this.navId + '" class="' + this.options.navClass + ' tabs-' + this.tabs.length + '">';
+		nav += '<ul class="clearfix">';
 
 		this.tabs.each(function(index, tab) {
 			// Start index from 1 not 0. Used to number tabs
-			var index = index + 1;
+			var tabIndex = index + 1;
 
 			// add an incremental class to each tab
-			$(tab).addClass('tab-' + index);
+			$(tab).addClass('tab-' + tabIndex);
 
 			// retreive the content for the nav text
-			var navItemValue = (that.options.navSource) ? $.trim($(this).find(that.options.navSource ).text()) : index,
-				navItemClass = '',
-				activeClass = '';
+			var navItemValue = (_this.options.navSource) ? $.trim($(this).find(_this.options.navSource).text()) : tabIndex;
+			var navItemClass = '';
+			var activeClass = '';
 
 			// hide source element content
-			if (that.options.navSourceHide) {
-				$(this).find(that.options.navSource).hide();
+			if (_this.options.navSourceHide) {
+				$(this).find(_this.options.navSource).hide();
 			}
 
 			// add classes to the nav for first and last
-			if (index === 1) {
+			if (tabIndex === 1) {
 				navItemClass = 'first';
-			} else if ( index === that.tabs.length ) {
+			} else if (tabIndex === _this.tabs.length) {
 				navItemClass = 'last';
 			} else {
 				navItemClass = '';
 			}
 
-			//  add a class to the nav for the tab that is initially active
-			if (index ===  that.options.activeTab) {
+			//  add a class to the nav for the tab _this is initially active
+			if (tabIndex ===  _this.options.activeTab) {
 				activeClass = 'active';
 			} else {
 				activeClass = '';
 			}
 
-			nav = nav + '<li class="target-' + index + ' ' + navItemClass + ' ' + activeClass + '"><a href="#">' + navItemValue + '<span>&nbsp;</span></a></li>';
+			nav += '<li class="target-' + tabIndex + ' ' + navItemClass + ' ' + activeClass + '">';
+			nav += '<a href="#">' + navItemValue + '<span>&nbsp;</span></a>';
+			nav += '</li>';
 
-			if (index ===  that.options.activeTab) {
+			if (tabIndex ===  _this.options.activeTab) {
 				$(this).addClass('active-tab');
 			}
 
 			// hide all but the initially active tab
-			if (index !==  that.options.activeTab) {
-				$( this ).hide();
+			if (tabIndex !==  _this.options.activeTab) {
+				$(this).hide();
 			}
 		});
 
@@ -140,26 +147,26 @@
 	};
 
 	Tabs.prototype.addNavEvents = function() {
-		var that = this;
+		var _this = this;
 
 		$('#' + this.navId).delegate('a', 'click', function(event) {
 			event.preventDefault();
 
 			var tgt = parseInt(this.parentNode.className.match(/target-\d/).toString().match(/\d/));
 
-			that.options.auto = false;
+			_this.options.auto = false;
 
-			that.container.find('.active').removeClass('active');
+			_this.container.find('.active').removeClass('active');
 
 			$(this).parent().addClass('active');
 
-			if (that.currentTab !== tgt) {
-				that.contentControl(tgt);
+			if (_this.currentTab !== tgt) {
+				_this.contentControl(tgt);
 			}
 		});
 	};
 
-	Tabs.prototype.contentControl = function (tgt) {
+	Tabs.prototype.contentControl = function(tgt) {
 		var nav = $('#' + this.navId);
 
 		this.currentheight = this.heightArray[tgt - 1];
@@ -176,25 +183,25 @@
 
 		nav.find('.active').removeClass('active');
 		nav.find('.target-' + tgt).addClass('active');
-	},
+	};
 
 	Tabs.prototype.autoOn = function() {
-		var that = this,
-			tgt = this.currentTab + 1,
-			cycleCount = 1,
-			cycleInterval;
+		var _this = this;
+		var tgt = this.currentTab + 1;
+		var cycleCount = 1;
+		var cycleInterval;
 
 		cycleInterval = setInterval(function() {
 
-			if (that.options.auto) {
+			if (_this.options.auto) {
 
 				// If a number of cycles has been set
-				if (that.options.cycles !== false) {
+				if (_this.options.cycles !== false) {
 
-					if (cycleCount <= that.options.cycles) {
+					if (cycleCount <= _this.options.cycles) {
 
-						if (tgt <= that.tabs.length) {
-							that.contentControl(tgt);
+						if (tgt <= _this.tabs.length) {
+							_this.contentControl(tgt);
 							tgt++;
 						} else {
 							tgt = 1;
@@ -202,14 +209,14 @@
 						}
 
 					} else {
-						that.contentControl(1);
+						_this.contentControl(1);
 						clearInterval(cycleInterval);
 					}
 
 				} else {
 
-					if (tgt <= that.tabs.length) {
-						that.contentControl(tgt);
+					if (tgt <= _this.tabs.length) {
+						_this.contentControl(tgt);
 						tgt++;
 					} else {
 						tgt = 1;
@@ -226,21 +233,21 @@
 	Tabs.prototype.prepareGrouping = function() {
 
 		for (var i = 0; i < this.tabs.length; i += this.options.grouping) {
-			this.tabs.slice(i, i + this.options.grouping ).wrapAll('<div class="tab"></div>');
+			this.tabs.slice(i, i + this.options.grouping).wrapAll('<div class="tab"></div>');
 		}
 
 		this.tabs = this.container.find('.tab');
-	}
+	};
 
 	Tabs.prototype.maxHeight = function(tabs) {
 		var heightArray = [];
 
-		this.tabs.each(function() {
+		tabs.each(function() {
 			heightArray.push($(this).outerHeight());
 		});
 
 		return heightArray;
-	}
+	};
 
 	// Create the jQuery plugin
 	$.fn.tabs = function(options) {
