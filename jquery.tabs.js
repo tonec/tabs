@@ -1,10 +1,25 @@
 (function(global, factory) {
 	'use strict';
 
-	if (typeof module === 'object' && typeof module.exports === 'object') {
-		module.export = (['jquery'], factory);
+	if (typeof define === 'function' && define.amd) {
+		// AMD. Register as an anonymous module.
+		define(['jquery'], factory);
+	} else if (typeof module === 'object' && module.exports) {
+		// Node/CommonJS
+		module.exports = function(global, jQuery) {
+			if (jQuery === undefined) {
+				if (typeof window !== 'undefined') {
+					jQuery = require('jquery');
+				} else {
+					jQuery = require('jquery')(global);
+				}
+			}
+			factory(jQuery);
+			return jQuery;
+		};
 	} else {
-		factory(global.jQuery);
+		// Browser globals
+		factory(jQuery);
 	}
 })(this, function($) {
 	'use strict';
